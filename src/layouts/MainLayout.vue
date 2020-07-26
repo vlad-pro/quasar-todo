@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+    <q-header>
       <q-toolbar>
         <q-btn
           flat
@@ -10,13 +10,12 @@
           aria-label="Menu"
           @click="leftDrawerOpen = !leftDrawerOpen"
         />
-
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
+      <div class="q-px-lg q-pt-xl q-md-md">
+        <div class="text-h3">Todo</div>
+        <div class="text-subtitle1">Monday, Jul 26</div>
+      </div>
+      <q-img src="../statics/bc.jpg" class="header-image absolute-top" />
     </q-header>
 
     <q-drawer
@@ -26,10 +25,7 @@
       content-class="bg-grey-1"
     >
       <q-list>
-        <q-item-label
-          header
-          class="text-grey-8"
-        >
+        <q-item-label header class="text-grey-8">
           Essential Links
         </q-item-label>
         <EssentialLink
@@ -92,12 +88,12 @@ const linksData = [
     icon: 'favorite',
     link: 'https://awesome.quasar.dev'
   }
-];
+]
 
 export default {
   name: 'MainLayout',
   components: { EssentialLink },
-  data () {
+  data() {
     return {
       leftDrawerOpen: false,
       essentialLinks: linksData
@@ -105,3 +101,12 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.header-image {
+  height: 100%;
+  z-index: -1;
+  opacity: 0.3;
+  filter: grayscale(100%);
+}
+</style>

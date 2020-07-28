@@ -13,7 +13,7 @@
       </q-toolbar>
       <div class="q-px-lg q-pt-xl q-md-md">
         <div class="text-h3">Todo</div>
-        <div class="text-subtitle1">Monday, Jul 26</div>
+        <div class="text-subtitle1">{{ todayDate }}</div>
       </div>
       <q-img src="../statics/bc.jpg" class="header-image absolute-top" />
     </q-header>
@@ -21,19 +21,44 @@
     <q-drawer
       v-model="leftDrawerOpen"
       show-if-above
-      bordered
-      content-class="bg-grey-1"
+      :width="250"
+      :breakpoint="600"
     >
-      <q-list>
-        <q-item-label header class="text-grey-8">
-          Essential Links
-        </q-item-label>
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
+      <q-scroll-area
+        style="height: calc(100% - 176px); margin-top: 176px; border-right: 1px solid #ddd"
+      >
+        <q-list padding>
+          <q-item clickable v-ripple>
+            <q-item-section avatar>
+              <q-icon name="list" />
+            </q-item-section>
+
+            <q-item-section>
+              ToDo
+            </q-item-section>
+          </q-item>
+
+          <q-item clickable v-ripple>
+            <q-item-section avatar>
+              <q-icon name="help" />
+            </q-item-section>
+
+            <q-item-section>
+              Help
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </q-scroll-area>
+
+      <q-img class="absolute-top" src="../statics/bc.jpg" style="height: 176px">
+        <div class="absolute-bottom bg-transparent">
+          <q-avatar size="56px" class="q-mb-sm">
+            <img src="https://www.block-space.info/img/vladimir.png" />
+          </q-avatar>
+          <div class="text-weight-bold">Vlad Pro</div>
+          <div>@vovaproskurin</div>
+        </div>
+      </q-img>
     </q-drawer>
 
     <q-page-container>
@@ -43,7 +68,7 @@
 </template>
 
 <script>
-import EssentialLink from 'components/EssentialLink.vue'
+import { date } from 'quasar'
 
 const linksData = [
   {
@@ -92,11 +117,16 @@ const linksData = [
 
 export default {
   name: 'MainLayout',
-  components: { EssentialLink },
   data() {
     return {
       leftDrawerOpen: false,
       essentialLinks: linksData
+    }
+  },
+  computed: {
+    todayDate() {
+      let timeStamp = Date.now()
+      return date.formatDate(timeStamp, 'dddd D MMMM')
     }
   }
 }

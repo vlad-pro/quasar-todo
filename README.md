@@ -1,6 +1,5 @@
 ## [Live Demo :rocket:](https://zen-bassi-3f4260.netlify.app)
 
-
 # Quasar ToDo (quasar-todo)
 
 A Quasar Framework app
